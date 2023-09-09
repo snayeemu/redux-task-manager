@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addTask } from "../../redux/features/tasks/tasksSlice";
 import Modal from "../ui/Modal";
 
@@ -28,7 +28,7 @@ const AddTaskModal = ({ isOpen, setIsOpen }) => {
             className="w-full rounded-md"
             type="text"
             id="title"
-            {...register("name")}
+            {...register("title")}
           />
         </div>
 

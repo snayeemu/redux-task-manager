@@ -10,6 +10,10 @@ const Tasks = () => {
   const { tasks } = useSelector((state) => state.tasksSlice);
   console.log(tasks);
 
+  const pendingTask = tasks.filter((task) => task.status === "pending");
+  const runningTask = tasks.filter((task) => task.status === "running");
+  const doneTask = tasks.filter((task) => task.status === "done");
+
   return (
     <div className="h-screen grid grid-cols-12">
       <div className="col-span-9 px-10 pt-10">
@@ -42,48 +46,39 @@ const Tasks = () => {
             <div className="flex sticky top-0 justify-between bg-[#D3DDF9] p-5 rounded-md mb-3">
               <h1>Up Next</h1>
               <p className="bg-primary text-white w-6 h-6 grid place-content-center rounded-md">
-                0
+                {pendingTask.length}
               </p>
             </div>
             <div className="space-y-3">
-              {tasks.map(
-                (task) =>
-                  task.status === "pending" && (
-                    <TaskCard key={`task-id-${task.id}`} task={task} />
-                  )
-              )}
+              {pendingTask.map((task) => (
+                <TaskCard key={`task-id-${task.id}`} task={task} />
+              ))}
             </div>
           </div>
           <div className="relative h-[800px] overflow-auto">
             <div className="flex sticky top-0 justify-between bg-[#D3DDF9] p-5 rounded-md mb-3">
               <h1>In Progress</h1>
               <p className="bg-primary text-white w-6 h-6 grid place-content-center rounded-md">
-                0
+                {runningTask.length}
               </p>
             </div>
             <div className="space-y-3">
-              {tasks.map(
-                (task) =>
-                  task.status === "running" && (
-                    <TaskCard key={`task-id-${task.id}`} task={task} />
-                  )
-              )}
+              {runningTask.map((task) => (
+                <TaskCard key={`task-id-${task.id}`} task={task} />
+              ))}
             </div>
           </div>
           <div className="relative h-[800px] overflow-auto">
             <div className="flex sticky top-0 justify-between bg-[#D3DDF9] p-5 rounded-md mb-3">
               <h1>Up Next</h1>
               <p className="bg-primary text-white w-6 h-6 grid place-content-center rounded-md">
-                0
+                {doneTask.length}
               </p>
             </div>
             <div className="space-y-3">
-              {tasks.map(
-                (task) =>
-                  task.status === "done" && (
-                    <TaskCard key={`task-id-${task.id}`} task={task} />
-                  )
-              )}
+              {doneTask.map((task) => (
+                <TaskCard key={`task-id-${task.id}`} task={task} />
+              ))}
             </div>
           </div>
         </div>
